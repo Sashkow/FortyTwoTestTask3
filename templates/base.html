@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load staticfiles %}        
+        <meta charset="utf-8">
+        <title>{% block pagetitle%} 42 Coffee Cups Test Assignment {% endblock %}</title>
+         
+        {% block csslinks %} 
+        {% endblock %}
+
+        <link rel="stylesheet" type="text/css" href="/static/hello/style.css">    
+
+        <meta http-equiv="X-UA-Compatible" content="chrome=IE7" />
+
+        <meta name="viewport" content="initial-scale=1.0, width=device-width"/>
+        <meta name="apple-mobile-web-app-capable" content="yes"/>
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+        <!-- <link rel="stylesheet" href="/static/css/screen.css" media="screen, projection"/> -->
+
+        
+
+    </head>
+
+    <body>
+        <h1>{% block title %}42 Coffee Cups Test Assignment {% endblock %}</h1>
+
+        {% block content %}
+            no content
+        {% endblock %}
+    </body>
+</html>

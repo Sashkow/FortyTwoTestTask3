@@ -1,0 +1,42 @@
+{% extends "hello/base.html" %}
+{% load staticfiles%}
+{% load edit_link %}
+
+{% block pagetitle %} Main Page {% endblock %}
+
+{% block csslinks %} 
+<link rel="stylesheet" type="text/css" href="/static/hello/style.css">    
+{% endblock %}
+
+
+{% block content %}
+        
+        <div class="left-subcolumn">
+
+            <div>Name: {{person.name}}</div>
+            <div>Last name: {{person.surname}}</div>
+            <div>Date of birth: {{person.birth_date}}</div>
+            
+            {% if person.ava %}
+                <div><img src="{{person.ava.thumbnail.url}}"></div>
+            {% else %}
+                <div><img src="{% static "hello/img/default_ava.png" %}"></div>
+            {% endif %}
+
+        </div>
+        <div class="right-subcolumn">
+            <div>Contacts</div>
+            <br>
+            <div>Email: {{person.email}}</div>
+            <div>Jabber: {{person.jabber}}</div>
+            <div>Skype: {{person.skype}}</div>
+            <div>Other contacts: </div>
+            <br>
+            {{person.contacts}}
+            <br>
+            <div>Bio:</div>
+            <br>
+            {{person.bio}}
+
+        </div>
+{% endblock %}

@@ -1,0 +1,52 @@
+{% extends "hello/base.html" %}
+
+{% load staticfiles %}
+
+{% block pagetitle %} Edit Page {% endblock %}
+
+
+{% block csslinks %} 
+       <script src="{% static 'hello/js/main.js' %}"></script>
+       
+       {{form.media}}
+{% endblock %}
+<a href=""></a>
+
+{% block content %}
+    <form id="post-form" enctype="multipart/form-data" action="{% url 'edit-ajax' %}" method="post">
+        {% csrf_token %}
+        <div class="left-subcolumn">
+            <div>Name: {{form.name}}</div>
+            <div>Last name: {{form.surname}}</div>
+            <div>Date of birth: {{form.birth_date}}</div>
+            <!-- <div>NEW Date of birth: {{form.new_birth_date}}</div> -->
+            <div>Photo:</div>
+            <div>{{form.ava}}</div>
+
+            {% if person.ava %}
+                <div><img id="id_img" src="{{person.ava.thumbnail.url}}"></div>
+            {% else %}
+                <div><img id="id_img" src="{% static "hello/img/default_ava.png" %}"></div>
+            {% endif %}
+
+        </div>
+        <div class="right-subcolumn">
+            <div>Contacts</div>
+            <br>
+            <div>Email: {{form.email}}</div>
+            <div>Jabber: {{form.jabber}}</div>
+            <div>Skype: {{form.skype}}</div>
+            <div>Other contacts:</div>
+            <br>
+            <div>{{form.contacts}}</div>
+            <br>
+            <div>Bio:</div>
+            <br>
+            <div>{{form.bio}}</div>
+        </div>
+        <div id="results"></div>
+        <input id="id_button" name="save_and_back_submit" type="submit" value="Save" style="display:inline-block;" />
+        <div style="display:inline-block;"><a href="{% url 'main' %}">cancel</a></div>
+    </form>
+{% endblock %}
+

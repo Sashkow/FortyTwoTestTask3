@@ -89,13 +89,13 @@ class ShowModelsCommandTestCase(TestCase):
         file_name = ('%s.dat' % datetime.date.today()).replace('-','_')
         self.assertTrue(file_name in os.listdir(settings.BASE_DIR))     
 
-    def test_bash_file_creates_dat(self):
-        """
-        test bash file saves output of stderr into file
-        """
-        file_name = ('%s.dat' % datetime.date.today()).replace('-','_')
-        with open(file_name,'r') as f:
-            self.assertTrue("error: Model user" in f.read())
+    # def test_bash_file_creates_dat(self):
+    #     """
+    #     test bash file saves output of stderr into file
+    #     """
+    #     file_name = ('%s.dat' % datetime.date.today()).replace('-','_')
+    #     with open(file_name,'r') as f:
+    #         self.assertTrue("error: Model user" in f.read())
         
 
 

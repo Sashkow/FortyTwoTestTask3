@@ -105,73 +105,73 @@ class ModelEntry(models.Model):
         return " ".join([self.model_name, self.istance_name, str(self.instance_pk), self.event])
 
 
-from functools import wraps
-from django.db import connection
+# from functools import wraps
+# from django.db import connection
 
 
-def disable_for_loaddata(signal_handler):
-    @wraps(signal_handler)
-    def wrapper(*args, **kwargs):
-        if kwargs['raw']:
-            print "Skipping signal for %s %s" % (args, kwargs)
-            return
-        signal_handler(*args, **kwargs)
-    return wrapper
+# def disable_for_loaddata(signal_handler):
+#     @wraps(signal_handler)
+#     def wrapper(*args, **kwargs):
+#         if kwargs['raw']:
+#             print "Skipping signal for %s %s" % (args, kwargs)
+#             return
+#         signal_handler(*args, **kwargs)
+#     return wrapper
 
 
-@disable_for_loaddata
-def models_signals_receiver(sender, instance, created, **kwargs):
-    ### surpress endless recursion
-    if sender==ModelEntry:
-        return
+# @disable_for_loaddata
+# def models_signals_receiver(sender, instance, created, **kwargs):
+#     ### surpress endless recursion
+#     if sender==ModelEntry:
+#         return
 
-    # print sender
-    ### if table for ModelEntry is ready
-    tables = connection.introspection.table_names()
-    if  ModelEntry._meta.db_table in tables:
-        if created ==True:
-            event = "create"
-        else:
-            event = "save"
+#     # print sender
+#     ### if table for ModelEntry is ready
+#     tables = connection.introspection.table_names()
+#     if  ModelEntry._meta.db_table in tables:
+#         if created ==True:
+#             event = "create"
+#         else:
+#             event = "save"
 
-        modelentry = ModelEntry(
-            model_name=str(sender.__name__),
-            istance_name=str(instance),
-            instance_pk=instance.pk,
-            event=event)
-        modelentry.save()
-
-
-def models_signals_receiver_delete(sender, instance, **kwargs):
-    ### surpress endless recursion
-    if sender==ModelEntry:
-        return
-
-    # print sender
-    ### if table for ModelEntry is ready
-    tables = connection.introspection.table_names()
-    if  ModelEntry._meta.db_table in tables:
-        modelentry = ModelEntry(
-            model_name=str(sender.__name__),
-            istance_name=str(instance),
-            instance_pk=instance.pk,
-            event="delete")
-        modelentry.save()
+#         modelentry = ModelEntry(
+#             model_name=str(sender.__name__),
+#             istance_name=str(instance),
+#             instance_pk=instance.pk,
+#             event=event)
+#         modelentry.save()
 
 
+# def models_signals_receiver_delete(sender, instance, **kwargs):
+#     ### surpress endless recursion
+#     if sender==ModelEntry:
+#         return
+
+#     # print sender
+#     ### if table for ModelEntry is ready
+#     tables = connection.introspection.table_names()
+#     if  ModelEntry._meta.db_table in tables:
+#         modelentry = ModelEntry(
+#             model_name=str(sender.__name__),
+#             istance_name=str(instance),
+#             instance_pk=instance.pk,
+#             event="delete")
+#         modelentry.save()
 
 
 
-from django.contrib.auth.models import Permission, User
-from django.contrib.contenttypes.models import ContentType
-from apps.hello.models import Person
-from south.models import MigrationHistory 
 
-# models_list = models.get_models(include_auto_created=True)
-models_list = [User, ModelEntry, Person, RequestData]
-for ModelClass in models_list:
-    post_save.connect(models_signals_receiver, sender=ModelClass)
 
-for ModelClass in models_list:
-    post_delete.connect(models_signals_receiver_delete, sender=ModelClass)
+# from django.contrib.auth.models import Permission, User
+# from django.contrib.contenttypes.models import ContentType
+# from apps.hello.models import Person
+# from south.models import MigrationHistory 
+
+# # models_list = models.get_models(include_auto_created=True)
+# models_list = [User, ModelEntry, Person, RequestData]
+# for ModelClass in models_list:
+#     post_save.connect(models_signals_receiver, sender=ModelClass)
+
+# for ModelClass in models_list:
+#     post_delete.connect(models_signals_receiver_delete, sender=ModelClass)
 

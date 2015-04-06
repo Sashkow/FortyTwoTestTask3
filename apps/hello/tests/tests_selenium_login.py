@@ -1,12 +1,15 @@
 
+
 from django.test import LiveServerTestCase
 from selenium.webdriver.firefox.webdriver import WebDriver
+
 
 class MyLiveServerTestCase(LiveServerTestCase):    
     """
     BaseCleass for my selenium test cases
     """
-    pass
+    fixtures = ['test_data.json']
+    
     # @classmethod
     # def setUpClass(cls):
     #     cls.driver = WebDriver()

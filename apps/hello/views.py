@@ -18,7 +18,7 @@ from django.contrib.auth import authenticate
 from django.contrib import auth
 
 import json
-from django.utils import simplejson
+# from django.utils import json
 
 
 def main(request):

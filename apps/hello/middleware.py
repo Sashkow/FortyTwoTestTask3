@@ -15,6 +15,7 @@ class RequestStore(object):
         else:
             request_args = request.GET
 
+        print request
         if 'user' in dir(request) and request.user.username != "":
             username = request.user.username
         else:

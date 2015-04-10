@@ -5,6 +5,7 @@ test:
 	java -jar selenium-server-standalone-2.45.0.jar&
 	ps -e
 	killall java
+	killall java
 	PYTHONPATH=`pwd` DJANGO_SETTINGS_MODULE=$(SETTINGS) $(MANAGE) test
 
 

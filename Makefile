@@ -2,9 +2,9 @@ MANAGE=django-admin.py
 SETTINGS=fortytwo_test_task.settings
 
 test:
-	java -jar selenium-server-standalone-2.45.0.jar&
-	uname -a
-	PYTHONPATH=`pwd` DJANGO_SETTINGS_MODULE=$(SETTINGS) $(MANAGE) test hello.tests.tests_selenium
+	# java -jar selenium-server-standalone-2.45.0.jar&
+	pwd
+	# PYTHONPATH=`pwd` DJANGO_SETTINGS_MODULE=$(SETTINGS) $(MANAGE) test hello.tests.tests_selenium
 
 
 run:

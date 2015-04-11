@@ -5,6 +5,7 @@ test:
 	# java -jar selenium-server-standalone-2.45.0.jar&
 	pwd
 	ls -l /home/deploy/	
+	ls
 	# PYTHONPATH=`pwd` DJANGO_SETTINGS_MODULE=$(SETTINGS) $(MANAGE) test hello.tests.tests_selenium
 
 
